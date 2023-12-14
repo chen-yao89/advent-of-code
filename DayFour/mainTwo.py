@@ -32,17 +32,13 @@ with open(os.path.join(__location__, 'input.txt')) as inputFile:
 					"cardIds": getCardIds(wonCards, id),
 					"count": 1
 				})
-		print(myCards)
 		for card in myCards:
 				if len(card["cardIds"]) == 0:
 					continue
 				cardIds = card["cardIds"]
-				while len(card["cardIds"]) > 0:
+				if len(card["cardIds"]) > 0:
 					for wonCard in cardIds:
-						myCards[wonCard-1]["count"] += 1
-						card["cardIds"].remove(wonCard)
-						card["cardIds"] += myCards[wonCard-1]["cardIds"]
-						# print(card)
+						myCards[wonCard-1]["count"] += card["count"]
 		for card in myCards:
 			count += card["count"]
 		print(count)
