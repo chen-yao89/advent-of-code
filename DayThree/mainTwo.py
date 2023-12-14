@@ -1,12 +1,6 @@
 from functools import reduce
 import re
 
-def multiplyList(myList):
-    result = 1
-    for x in myList:
-        result = result * x
-    return result
-
 with open('c:/code/advent-of-code/DayThree/input.txt') as inputFile:
     lines = inputFile.readlines()
     symbol = "*"
