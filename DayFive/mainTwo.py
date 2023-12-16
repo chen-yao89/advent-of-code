@@ -42,28 +42,7 @@ def getMappingRange(lines, category):
         })
     return result
 
-def getDestination(sourceRange, mapping):
-    destinationRange = []
-    for source in sourceRange:
-        unMappedSource = source
-        for map in mapping:
-            start = map["source"]
-            end = map["source"] + map["range"] - 1
-            sourceStart = source[0]
-            sourceEnd = source[0] + source[1] - 1
-            if sourceStart > end:
-                continue
-            if sourceEnd < start:
-                continue
-            if sourceEnd <= end:
-                if sourceStart >= start:
-                    destinationRange.append([map["destination"] + (sourceStart - start), source[1]])
-                if sourceStart < start:
-                    destinationRange.append([map["destination"], sourceEnd - start])
-        destinationRange += unMappedSource
-    return destinationRange
-
-def getSingleMapping(source, mapping):
+def getMappedDestination(source, mapping):
     destinationRange = []
     for map in mapping:
         start = map["source"]
@@ -79,7 +58,14 @@ def getSingleMapping(source, mapping):
                 destinationRange.append([map["destination"] + (sourceStart - start), source[1]])
             if sourceStart < start:
                 destinationRange.append([map["destination"], sourceEnd - start + 1])
-        # destinationRange += unMappedSource
+    return destinationRange
+
+def getDestination(sourceRange, mapping):
+    destinationRange = []
+    for source in sourceRange:
+        unMappedSource = source
+        getSingleMapping(source, mapping)
+        destinationRange += unMappedSource
     return destinationRange
 
 # with open(os.path.join(__location__, 'input.txt')) as inputFile:

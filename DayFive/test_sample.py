@@ -1,29 +1,29 @@
-from mainTwo import getSingleMapping
+from mainTwo import getMappedDestination
 
-def test_case1():
+def allSeedsAreMapped():
     sourceRange = [50, 10]
     mapping = [{
         "destination": 52, 
         "source": 49, 
         "range": 20}]
     output = [[53, 10]]
-    assert getSingleMapping(sourceRange, mapping) == output, "test"
+    assert getMappedDestination(sourceRange, mapping) == output, "all seeds from source are mapped to destination"
 
-def test_case2():
+def partialSeedsAreMapped():
     sourceRange = [50, 10]
     mapping = [{
         "destination": 57, 
         "source": 55, 
         "range": 20}]
     output = [[57, 5]]
-    assert getSingleMapping(sourceRange, mapping) == output, "test"
+    assert getMappedDestination(sourceRange, mapping) == output, "part of the seeds from source are mapped to destination"
 
 
-def test_case3():
-    sourceRange = [50, 10]
+def noSeedsAreMapped():
+    sourceRange = [40, 10]
     mapping = [{
         "destination": 57, 
         "source": 55, 
         "range": 20}]
-    output = [[57, 5]]
-    assert getSingleMapping(sourceRange, mapping) == output, "test "
+    output = []
+    assert getMappedDestination(sourceRange, mapping) == output, "none of the seeds from source are mapped to destination "
